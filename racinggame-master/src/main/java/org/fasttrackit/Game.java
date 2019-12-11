@@ -5,6 +5,7 @@ import org.w3c.dom.ls.LSOutput;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,7 +17,7 @@ public class Game {
     private List<Vehicle> competitors = new ArrayList<>();
 
 
-    public void start(){
+    public void start() throws Exception {
         System.out.println("Starting Game...");
 
         initializeTraks();
@@ -48,16 +49,21 @@ public class Game {
     }
 
 
-    private Track getSelectedTrackFromUser() {
+    private Track getSelectedTrackFromUser() throws Exception {
 
         System.out.println(" Please select track number.");
         Scanner scanner = new Scanner(System.in);
-        int selected = scanner.nextInt();
 
-        Track selectedTrack = tracks [selected - 1];
-        System.out.println(" Selected track is " + selectedTrack.getName());
-        return tracks [selected - 1];
-
+        try {
+            int selected = scanner.nextInt();
+            Track selectedTrack = tracks[selected - 1];
+            System.out.println(" Selected track is " + selectedTrack.getName());
+            return tracks[selected - 1];
+        } catch (InputMismatchException e) {
+            throw new RuntimeException(" You have entered an invalid value");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new Exception(" You have selected a non-existing track.");
+        }
 
 
 
@@ -67,7 +73,7 @@ public class Game {
         Track track1 = new Track();
         track1.setName("Silverstone");
         track1.setLenght(4.2);
-        // prima pozitie din sir este tot timpu "0"
+        // prima pozitie din sir este tot timpul "0"
         tracks [0] = track1;
 
         Track track2 = new Track();
