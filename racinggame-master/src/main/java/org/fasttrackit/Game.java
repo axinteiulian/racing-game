@@ -1,5 +1,8 @@
 package org.fasttrackit;
 
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +23,45 @@ public class Game {
         displayTracks();
 
         initiliazeCompetitors();
+        Track selectedTrack = getSelectedTrackFromUser();
+
+
+
 
         // enhaced for
         for (Vehicle vehicle : competitors) {
             System.out.println("It`s "+ vehicle.getName() + "`s turn.");
 
-        }
+            double speed = getAccelerationSpeedFromUser();
 
+            vehicle.accelerate(speed);
+            if (vehicle.getTravelDistance() >= selectedTrack.getLenght());
+
+        }
     }
 
+
+    private double getAccelerationSpeedFromUser( ) {
+        System.out.println("Please enter acceleration speed.");
+        Scanner scanner = new Scanner((System.in));
+        return scanner.nextDouble();
+    }
+
+
+    private Track getSelectedTrackFromUser() {
+
+        System.out.println(" Please select track number.");
+        Scanner scanner = new Scanner(System.in);
+        int selected = scanner.nextInt();
+
+        Track selectedTrack = tracks [selected - 1];
+        System.out.println(" Selected track is " + selectedTrack.getName());
+        return tracks [selected - 1];
+
+
+
+
+    }
     private void initializeTraks(){
 
         Track track1 = new Track();

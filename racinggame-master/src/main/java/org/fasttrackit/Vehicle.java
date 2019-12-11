@@ -18,6 +18,10 @@ public class Vehicle {
     }
 
     //    semnatura metodei
+
+    public double accelerate (double speed) {
+        return accelerate(speed, 1);
+    }
     public double accelerate(double speed, double durationInHours){
 
         double milageMultiplier = 1;
