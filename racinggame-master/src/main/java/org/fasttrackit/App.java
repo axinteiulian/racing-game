@@ -11,10 +11,15 @@ public class App
 //        Engine engine = new Engine();
 //        engine.manufacturer = "VW";
 
-        System.out.println( " Welcome to the Reacing Game!" );
+        System.out.println(" Welcome to the Reacing Game!");
 
         Game game = new Game();
         game.start();
+
+        //do {
+        //System.out.println("test");
+       // while (true);
+
 
         // *****
 
